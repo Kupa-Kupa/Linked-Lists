@@ -128,4 +128,22 @@ describe('Linked List Tests', () => {
     );
     expect(list6.length).toBe(6);
   });
+
+  test('Test removeAt(index):', () => {
+    const list6 = new LinkedList();
+    list6.append(1);
+    list6.prepend(0);
+    list6.append(5);
+    list6.removeAt(0);
+    console.log(list6);
+
+    expect(list6.toString()).toBe('( 1 ) -> ( 5 ) -> null');
+    expect(list6.length).toBe(2);
+
+    list6.removeAt(6);
+    list6.removeAt(1);
+
+    expect(list6.toString()).toBe('( 1 ) -> null');
+    expect(list6.length).toBe(1);
+  });
 });

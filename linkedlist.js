@@ -220,5 +220,40 @@ export default class LinkedList {
   }
 
   // removeAt(index) that removes the node at the given index.
-  removeAt(index) {}
+  removeAt(index) {
+    if (this.length === 0) {
+      return;
+    } else if (index >= this.length) {
+      return;
+    } else if (index === this.length - 1) {
+      this.pop();
+      return;
+    } else if (index < 0) {
+      return;
+    } else if (index === 0) {
+      let tmp = this.head;
+      console.log('this.head', this.head);
+      console.log('tmp.nextNode', tmp.nextNode);
+      this.head = tmp.nextNode;
+      console.log('this.head', this.head);
+      this.length--;
+      return;
+    }
+
+    let temp = this.head;
+    let prev = temp;
+    let indexCounter = 0;
+
+    for (let i = 0; i < this.length; i++) {
+      if (indexCounter === index) {
+        prev.nextNode = temp.nextNode;
+        this.length--;
+        return;
+      } else {
+        prev = temp;
+        temp = temp.nextNode;
+        indexCounter++;
+      }
+    }
+  }
 }
