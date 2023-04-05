@@ -186,7 +186,38 @@ export default class LinkedList {
 
   // insertAt(value, index) that inserts a new node with the provided
   // value at the given index.
-  insertAt(value, index) {}
+  insertAt(value, index) {
+    // if index is outside the range of the list then add it to the end
+    if (this.length === 0) {
+      this.head = new Node(value);
+      this.length++;
+      return;
+    } else if (index >= this.length) {
+      this.append(value);
+      return;
+    } else if (index < 1) {
+      this.prepend(value);
+      return;
+    }
+
+    let temp = this.head;
+    let prev = temp;
+    let indexCounter = 0;
+
+    for (let i = 0; i < this.length; i++) {
+      if (indexCounter === index) {
+        let newNode = new Node(value);
+        newNode.nextNode = temp;
+        prev.nextNode = newNode;
+        this.length++;
+        return;
+      } else {
+        prev = temp;
+        temp = temp.nextNode;
+        indexCounter++;
+      }
+    }
+  }
 
   // removeAt(index) that removes the node at the given index.
   removeAt(index) {}

@@ -112,4 +112,20 @@ describe('Linked List Tests', () => {
     expect(list4.toString()).toBe(null);
     expect(list5.toString()).toBe('( 0 ) -> null');
   });
+
+  test('Test insertAt(value, index):', () => {
+    const list6 = new LinkedList();
+    list6.append(1);
+    list6.prepend(0);
+    list6.append(5);
+    list6.insertAt(7, 1);
+    list6.insertAt(15, 0);
+    list6.insertAt(12, 15);
+    // console.log(list6.head);
+
+    expect(list6.toString()).toBe(
+      '( 15 ) -> ( 0 ) -> ( 7 ) -> ( 1 ) -> ( 5 ) -> ( 12 ) -> null'
+    );
+    expect(list6.length).toBe(6);
+  });
 });
