@@ -53,7 +53,9 @@ export default class LinkedList {
   prepend(value) {
     let temp = new Node(value);
     temp.nextNode = this.head;
+    // console.log('temp is', temp);
     this.head = temp;
+    // console.log('this.head is', this.head);
     this.length++;
     return;
   }
@@ -64,28 +66,123 @@ export default class LinkedList {
   }
 
   // tail returns the last node in the list
-  tail() {}
+  tail() {
+    if (this.length < 2) {
+      return this.head;
+    }
+
+    let temp = this.head;
+
+    for (let i = 1; i <= this.length; i++) {
+      if (i === this.length) {
+        return temp;
+      } else {
+        temp = temp.nextNode;
+      }
+    }
+  }
 
   // at(index) returns the node at the given index
-  at(index) {}
+  at(index) {
+    if (index === 0) {
+      return this.head;
+    }
+
+    // want to start at index 1
+    let temp = this.head.nextNode;
+
+    for (let i = 1; i <= this.length; i++) {
+      if (i === index) {
+        return temp;
+      } else {
+        temp = temp.nextNode;
+      }
+    }
+  }
 
   // pop removes the last element from the list
-  pop() {}
+  pop() {
+    if (this.length === 0) {
+      return null;
+    } else if (this.length === 1) {
+      let temp = this.head;
+      this.head = null;
+      this.length--;
+      return temp;
+    }
+
+    let temp = this.head;
+    let prev = temp;
+
+    for (let i = 1; i <= this.length; i++) {
+      if (i === this.length) {
+        prev.nextNode = null;
+        this.length--;
+        return temp;
+      } else {
+        prev = temp;
+        temp = temp.nextNode;
+      }
+    }
+  }
 
   // contains(value) returns true if the passed in value is in the list
   // and otherwise returns false.
-  contains(value) {
-    if (LinkedList.length === 0) return false;
+  contains(val) {
+    if (this.length === 0) return false;
+
+    let temp = this.head;
+    // console.log('temp is', temp);
+
+    for (let i = 1; i <= this.length; i++) {
+      if (temp.value === val) {
+        return true;
+      } else {
+        temp = temp.nextNode;
+      }
+    }
+
+    return false;
   }
 
   // find(value) returns the index of the node containing value, or null
   // if not found.
-  find(value) {}
+  find(val) {
+    if (this.length === 0) return null;
+
+    let temp = this.head;
+    let index = 0;
+
+    for (let i = 0; i < this.length; i++) {
+      if (temp.value === val) {
+        return index;
+      } else {
+        temp = temp.nextNode;
+        index++;
+      }
+    }
+
+    return null;
+  }
 
   // toString represents your LinkedList objects as strings, so you can
   // print them out and preview them in the console. The format should
   // be: ( value ) -> ( value ) -> ( value ) -> null
-  toString() {}
+  toString() {
+    if (this.length === 0) return null;
+
+    let temp = this.head;
+    let listString = `( ${this.head.value} ) -> `;
+
+    for (let i = 1; i <= this.length; i++) {
+      if (i === this.length) {
+        return listString + `null`;
+      } else {
+        temp = temp.nextNode;
+        listString += `( ${temp.value} ) -> `;
+      }
+    }
+  }
 
   // insertAt(value, index) that inserts a new node with the provided
   // value at the given index.

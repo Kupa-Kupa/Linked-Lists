@@ -49,4 +49,67 @@ describe('Linked List Tests', () => {
     });
     expect(list5.length).toBe(2);
   });
+
+  test('Test size() for different lists:', () => {
+    expect(list4.size()).toBe(1);
+    expect(list5.size()).toBe(2);
+  });
+
+  test('Test tail() for different lists:', () => {
+    expect(list4.tail()).toEqual({ value: 0, nextNode: null });
+    expect(list5.tail()).toEqual({ value: 1, nextNode: null });
+  });
+
+  test('Test at(index) for different lists:', () => {
+    expect(list4.at(0)).toEqual({ value: 0, nextNode: null });
+    expect(list5.at(0)).toEqual({
+      value: 0,
+      nextNode: { value: 1, nextNode: null },
+    });
+    expect(list5.at(1)).toEqual({ value: 1, nextNode: null });
+  });
+
+  test('Test pop() for different lists:', () => {
+    expect(list4.pop()).toEqual({ value: 0, nextNode: null });
+    expect(list4.length).toBe(0);
+    expect(list5.pop()).toEqual({ value: 1, nextNode: null });
+    expect(list5.length).toBe(1);
+  });
+
+  test('Test contains(val):', () => {
+    const list6 = new LinkedList();
+    list6.append(1);
+    list6.prepend(0);
+    list6.append(5);
+
+    expect(list6.contains(0)).toBe(true);
+    expect(list6.contains('hello')).toBe(false);
+    expect(list6.contains(1)).toBe(true);
+    expect(list6.contains(6)).toBe(false);
+  });
+
+  test('Test find(val):', () => {
+    const list6 = new LinkedList();
+    list6.append(1);
+    list6.prepend(0);
+    list6.append(5);
+
+    expect(list6.find(0)).toBe(0);
+    expect(list6.find('hello')).toBe(null);
+    expect(list6.find(1)).toBe(1);
+    expect(list6.find(6)).toBe(null);
+    expect(list6.find(5)).toBe(2);
+  });
+
+  test('Test toString():', () => {
+    const list6 = new LinkedList();
+    list6.append(1);
+    list6.prepend(0);
+    list6.append(5);
+
+    expect(list6.toString()).toBe('( 0 ) -> ( 1 ) -> ( 5 ) -> null');
+    expect(list3.toString()).toBe('( 1 ) -> ( 2 ) -> null');
+    expect(list4.toString()).toBe(null);
+    expect(list5.toString()).toBe('( 0 ) -> null');
+  });
 });
